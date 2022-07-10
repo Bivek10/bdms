@@ -22,7 +22,7 @@
 </style>
 </head>
 
-<body style="color:black">
+<body style="color:black;  background-color: #F0ECEC;">
   <?php
   include 'conn.php';
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
@@ -37,7 +37,7 @@
 </div>
 <div id="content">
   <div class="content-wrapper">
-    <div class="container-fluid">
+    <div class="container">
       <div class="row">
         <div class="col-md-12 lg-12 sm-12">
 

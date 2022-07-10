@@ -52,27 +52,10 @@
         <ul>
           <li><a href="#hero">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#chefs">Request Blood</a></li>
+          <li><a href="#chefs">Ours Donor</a></li>
+          <!-- <li><a href="#chefs">Our Donors</a></li> -->
           <li><a href="#book-a-table">Donate Blood</a></li>
-
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#contact">Request Blood</a></li>
         </ul>
       </nav><!-- .navbar -->
 
@@ -153,13 +136,19 @@ if (mysqli_num_rows($result) > 0) {
 <div class="section-header">
          <h2>Donors</h2>
          <p>Our <span>Valuable</span> Donors</p>
+
+
+
     </div>
+
 
 <div class="row">
   <?php
 include '../conn.php';
+
 //$sql = "select * from donor_details join blood where donor_details.donor_blood=blood.blood_id order by rand() limit 6";
-$sql = "select * from donor_details join blood where donor_details.donor_blood=blood.blood_id";
+$sql = "select * from donor_details join blood where donor_details.donor_blood=blood.blood_id order by donor_details.donor_id desc";
+
 $result = mysqli_query($conn, $sql);
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
@@ -173,15 +162,16 @@ if (mysqli_num_rows($result) > 0) {
 
               </div>
               <div class="member-info">
-              
+
                   <h4>Name: <?php echo $row['donor_name']; ?></h4>
                   <h6>Blood Group: <?php echo $row['blood_group']; ?></h6>
                   <h6>Number:  <?php echo $row['donor_number']; ?></h6>
                   <h6>Age: <?php echo $row['donor_age']; ?></h6>
                   <h6>Address<?php echo $row['donor_address']; ?></h6>
 
-                  <button type="button" class="btn btn-outline-danger">Send Request</button>
-            </div>
+                  <!-- <button type="button" class="btn btn-outline-danger">Send Request</button>
+             -->
+                </div>
 
                 </div>
 
@@ -270,7 +260,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                 <div class="error-message"></div>
                 <div class="sent-message">Your booking request was sent.Thank you!</div>
               </div> -->
-                 <div class ="text-center"><input type="submit" name="submit" class="btn btn-danger" value="Donate Now" style="cursor:pointer"></div>
+                 <div class ="text-center"><input type="submit" name="submit" class="btn btn-danger" value="Donate Now" style="cursor:pointer; margin-top:30px;"></div>
 
               <!-- <div class="text-center"><button type="submit">Donate Now</button></div> -->
             </form>
@@ -292,20 +282,23 @@ while ($row = mysqli_fetch_assoc($result)) {
           <p>Need Help? <span>Contact Us</span></p>
         </div>
 
-        <!-- <div class="mb-3">
-          <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
-        </div> -->
 
-        <!-- End Google Maps -->
+    </div>
 
-        <div class="row gy-4">
 
-          <div class="col-md-6">
+        <div class="row gy-4" style="margin-left:50px; margin-right:50px;"  >
+        <?php
+include '../conn.php';
+$sql = "select * from contact_info";
+$result = mysqli_query($conn, $sql);
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {?>
+                    <div class="col-md-6">
             <div class="info-item  d-flex align-items-center">
               <i class="icon bi bi-map flex-shrink-0"></i>
               <div>
                 <h3>Our Address</h3>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <p><?php echo $row['contact_address']; ?></p>
               </div>
             </div>
           </div><!-- End Info Item -->
@@ -315,60 +308,69 @@ while ($row = mysqli_fetch_assoc($result)) {
               <i class="icon bi bi-envelope flex-shrink-0"></i>
               <div>
                 <h3>Email Us</h3>
-                <p>contact@example.com</p>
+                <p><?php echo $row['contact_mail']; ?></p>
               </div>
             </div>
           </div><!-- End Info Item -->
+
 
           <div class="col-md-6">
             <div class="info-item  d-flex align-items-center">
               <i class="icon bi bi-telephone flex-shrink-0"></i>
               <div>
                 <h3>Call Us</h3>
-                <p>+1 5589 55488 55</p>
+                <p><?php echo $row['contact_phone']; ?></p>
               </div>
             </div>
           </div><!-- End Info Item -->
 
-          <div class="col-md-6">
-            <div class="info-item  d-flex align-items-center">
-              <i class="icon bi bi-share flex-shrink-0"></i>
-              <div>
-                <h3>Opening Hours</h3>
-                <div><strong>Mon-Sat:</strong> 11AM - 23PM;
-                  <strong>Sunday:</strong> Closed
-                </div>
-              </div>
-            </div>
-          </div><!-- End Info Item -->
+          <?php }
+}?>
+
+
+
+
 
         </div>
 
-        <form action="forms/contact.php" method="post" role="form" class="php-email-form p-3 p-md-4">
-          <div class="row">
-            <div class="col-xl-6 form-group">
-              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+    <br><br>
+<div class="card" style="margin-left:50px; margin-right:50px; margin-bottom:50px; padding:50px; ">
+<form name="sentMessage" action="send_request.php" method="post" >
+            <div class="control-group form-group">
+                <div class="controls">
+                    <label>Full Name:</label>
+                    <input type="text" class="form-control" id="name" name="fullname" required>
+                    <p class="help-block"></p>
+                </div>
             </div>
-            <div class="col-xl-6 form-group">
-              <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+            <div class="control-group form-group">
+                <div class="controls">
+                    <label>Phone Number:</label>
+                    <input type="tel" class="form-control" id="phone" name="contactno"  required >
+                <br>
+                  </div>
             </div>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-          </div>
-          <div class="form-group">
-            <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-          </div>
-          <div class="my-3">
-            <div class="loading">Loading</div>
-            <div class="error-message"></div>
-            <div class="sent-message">Your message has been sent. Thank you!</div>
-          </div>
-          <div class="text-center"><button type="submit">Send Message</button></div>
+
+            <div class="control-group form-group">
+                <div class="controls">
+                    <label>Email Address:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                    <br>
+                  </div>
+            </div>
+            <div class="control-group form-group">
+                <div class="controls">
+                    <label>Message:</label>
+                    <textarea rows="5" cols="100" class="form-control" id="message" name="message" required  maxlength="999" style="resize:none"></textarea>
+                   <br>
+                  </div>
+            </div>
+            <button type="submit" name="send"  class="btn btn-danger"> Send Request</button>
         </form>
+</div>
         <!--End Contact Form -->
 
-      </div>f
+      </div>
     </section><!-- End Contact Section -->
 
   </main><!-- End #main -->
@@ -379,12 +381,14 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Donate Us Blood</span></strong>. All Rights Reserved
+      <h4 id="displayDateTime"></h4>
       </div>
       <div class="credits">
 
-        Designed by <a href="https://bootstrapmade.com/">xyz</a>
+        Designed by <a href="#d">Usah Subedi &hearts;</a>
+
       </div>
+
     </div>
 
   </footer><!-- End Footer -->
@@ -393,6 +397,8 @@ while ($row = mysqli_fetch_assoc($result)) {
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center" style="margin-bottom: 20px; margin-right: 90px; "><i class="bi bi-arrow-up-short"></i></a>
 
   <div id="preloader"></div>
+
+
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -427,29 +433,17 @@ s0.parentNode.insertBefore(s1,s0);
   }
   setTimeOut(reload, seconds*1000)
 } -->
-<script>
-    $('#xxxHH').on('submit', function(e){
-      console.log("okkkk")
-        e.preventDefault();
-        console.log("okkkk")
-        let formData = new FormData(this);
-        formData.append('_token', '{{csrf_token()}}');
-        $.ajax({
-        url: 'savedata.php',
-        type:'POST',
-        data: formData,
-        error: function(err){
-            console.log(err)
-        },
-        success: function(res){
-            console.log(res)
-        },
-        cache: false,
-        contentType: false,
-        processData: false
-    })
-    })
-</script>
+<script type="text/javascript">
+  var today = new Date();
+  var day = today.getDay();
+  var daylist = ["Sunday","Monday","Tuesday","Wednesday ","Thursday","Friday","Saturday"];
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date+' '+time;
+
+  document.getElementById("displayDateTime").innerHTML = dateTime + ': Day : ' + daylist[day];
+
+  </script>
 
 </body>
 

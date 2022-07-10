@@ -7,11 +7,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
-  .navbar {
-    background-color: #333333  ;
-    padding: 10px 10px;
-    color:#FF0404  ;
+     .navbar {
+    background-color: #D00D0D  ;
+    padding: 10px 20px;
+    opacity: 0.9;
+    color:#D8CACA  ;
+
   }
+
   .navbar a {
     float: left;
     color: white;
@@ -35,7 +38,8 @@
     float: none;
   }
    #qq:hover{
-    background-color:#E5E8E8 ;
+    background-color:#FF9191 ;
+
     border-radius: 5px;
   }
 }
@@ -43,26 +47,30 @@
 </head>
 <body>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse" style="background-color:white ;">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" id="qq" href="dashboard.php" style="color:#F51A14;">Blood Bank & Donation Admin Panel</a>
+      <a class="navbar-brand" id="qq" href="dashboard.php" style="color:#795E5E;">Blood Bank & Donation </a>
     </div>
-    <ul class="nav navbar-nav navbar-right">
+    <ul class="nav navbar-nav navbar-right"  >
 
-      <li class="dropdown"><a class="dropdown-toggle" id="qw" data-toggle="dropdown" href="#" style="font-weight:bold;color:white "> <span class="glyphicon glyphicon-user"></span>&nbsp&nbsp
+      <li class="dropdown">
+      <li><a  href="dashboard.php" style="color:#432E2E ;">
         <?php
-        include 'conn.php';
-        $username=$_SESSION['username'];
-        $sql="select * from admin_info where admin_username='$username'";
-        $result=mysqli_query($conn,$sql) or die("query failed.");
-        $row=mysqli_fetch_assoc($result);
-        echo "Hello ".$row['admin_name'];
-       ?><span class="caret"></span></a>
-        <ul class="dropdown-menu" style="background-color:#D6EAF8;">
-          <li><a href="change_password.php" style="color:#DC7633  ">Change Password </a></li>
-          <li><a href="logout.php" style="color:#D35400 ;">Logout</a></li>
-        </ul>
+include 'conn.php';
+$username = $_SESSION['username'];
+$sql = "select * from admin_info where admin_username='$username'";
+$result = mysqli_query($conn, $sql) or die("query failed.");
+$row = mysqli_fetch_assoc($result);
+$name = $row['admin_name'];
+echo " <li> <p >Welcome to {$name}</p> </li>";
+
+?>
+</a></li>
+          <li><a href="change_password.php" style="color:#51504E  ">Change Password </a></li>
+          <li><a href="logout.php" style="color:#E84343 ;">Logout</a></li>
+
+
     </li>
     </ul>
 

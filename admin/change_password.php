@@ -26,7 +26,7 @@
 include 'conn.php';
   if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
   ?>
-<body style="color:black">
+<body style="color:black;  background-color: #F0ECEC;">
 <div id="header">
 <?php include 'header.php';
 ?>
