@@ -167,10 +167,11 @@ if (mysqli_num_rows($result) > 0) {
                   <h6>Blood Group: <?php echo $row['blood_group']; ?></h6>
                   <h6>Number:  <?php echo $row['donor_number']; ?></h6>
                   <h6>Age: <?php echo $row['donor_age']; ?></h6>
-                  <h6>Address<?php echo $row['donor_address']; ?></h6>
+                  <h6>Address: <?php echo $row['donor_address']; ?></h6>
 
-                  <!-- <button type="button" class="btn btn-outline-danger">Send Request</button>
-             -->
+                  <button type="button" class="btn btn-danger"><span class="bi bi-chat"></span></button>
+                  <!-- <button type="button" class="btn btn-outline-danger">Send Email</button> -->
+
                 </div>
 
                 </div>
@@ -358,13 +359,29 @@ if (mysqli_num_rows($result) > 0) {
                     <br>
                   </div>
             </div>
-            <div class="control-group form-group">
+            <div class="font-italic">Select Blood Group<span style="color:red">*</span></div>
+<div><select name="message" class="form-control" required>
+  <option value=""selected disabled>Select</option>
+  <?php
+include 'conn.php';
+$sql = "select * from blood";
+$result = mysqli_query($conn, $sql) or die("query unsuccessful.");
+while ($row = mysqli_fetch_assoc($result)) {
+    ?>
+   <option value=" I need  <?php echo $row['blood_group'] ?>  blood group">I need  <?php echo $row['blood_group'] ?>  blood group</option>
+  <?php }?>
+</select>
+</div>
+<br>
+<br>
+            <!-- <div class="control-group form-group">
                 <div class="controls">
                     <label>Message:</label>
                     <textarea rows="5" cols="100" class="form-control" id="message" name="message" required  maxlength="999" style="resize:none"></textarea>
-                   <br>
+
+                    <br>
                   </div>
-            </div>
+            </div> -->
             <button type="submit" name="send"  class="btn btn-danger"> Send Request</button>
         </form>
 </div>
@@ -385,7 +402,7 @@ if (mysqli_num_rows($result) > 0) {
       </div>
       <div class="credits">
 
-        Designed by <a href="#d">Usah Subedi &hearts;</a>
+        Designed by <a href="#d">XXXXXX &hearts;</a>
 
       </div>
 
@@ -445,7 +462,11 @@ s0.parentNode.insertBefore(s1,s0);
 
   </script>
 
+
 </body>
 
 
 </html>
+
+
+<!-- INSERT INTO `user_info` (`user_id`, `user_name`, `user_username`, `email`, `phone`, `password`) VALUES ('1', 'bivek', 'bivekkarki', 'aarus.meta@gmail.com', '9800965652', '1050aarus'); -->
